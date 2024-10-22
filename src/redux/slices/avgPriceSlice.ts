@@ -18,9 +18,18 @@ interface InitialStateInterface {
   sparkLineChartValues: SparkLineChartValuesInterface;
 }
 interface SparkLineChartValuesInterface {
-  usdPrices: number[];
-  eurPrices: number[];
-  pkrPrices: number[];
+  usdPrices: {
+    change: number;
+    values: number[];
+  };
+  eurPrices: {
+    change: number;
+    values: number[];
+  };
+  pkrPrices: {
+    change: number;
+    values: number[];
+  };
 }
 
 const initialState: InitialStateInterface = {
@@ -33,18 +42,27 @@ const initialState: InitialStateInterface = {
     avgPriceEUR: 0,
     avgPricePKR: 0,
   },
-// currentAvgPrice: data.currentAvgPrice,
+  // currentAvgPrice: data.currentAvgPrice,
   previousPrices: [],
   sparkLineChartValues: {
-    usdPrices: [],
-    eurPrices: [],
-    pkrPrices: [],
+    usdPrices: {
+      change: 0,
+      values: [],
+    },
+    eurPrices: {
+      change: 0,
+      values: [],
+    },
+    pkrPrices: {
+      change: 0,
+      values: [],
+    },
   },
-//   sparkLineChartValues: {
-//     usdPrices: data.usdPrices,
-//     eurPrices: data.eurPrices,
-//     pkrPrices: data.pkrPrices,
-//   },
+  // sparkLineChartValues: {
+  //   usdPrices: data.usdPrices,
+  //   eurPrices: data.eurPrices,
+  //   pkrPrices: data.pkrPrices,
+  // },
 };
 
 const addToSparkLineChartValues = (
@@ -53,19 +71,42 @@ const addToSparkLineChartValues = (
 ) => {
   const newState = { ...prevState };
 
-  if (newState.usdPrices.length >= 10) {
-    newState.usdPrices.shift();
+  if (newState.usdPrices.values.length >= 10) {
+    newState.usdPrices.values.shift();
   }
-  if(newState.eurPrices.length >= 10) {
-    newState.eurPrices.shift();
+  newState.usdPrices.values.push(parseFloat(data.avgPriceUSD.toFixed(2)));
+
+  if (newState.eurPrices.values.length >= 10) {
+    newState.eurPrices.values.shift();
   }
-  if(newState.pkrPrices.length >= 10) {
-    newState.pkrPrices.shift();
+  newState.eurPrices.values.push(parseFloat(data.avgPriceEUR.toFixed(2)));
+
+  if (newState.pkrPrices.values.length >= 10) {
+    newState.pkrPrices.values.shift();
   }
-  newState.usdPrices.push(parseFloat(data.avgPriceUSD.toFixed(2)));
-  newState.eurPrices.push(parseFloat(data.avgPriceEUR.toFixed(2)));
-  newState.pkrPrices.push(parseFloat(data.avgPricePKR.toFixed(2)));
+  newState.pkrPrices.values.push(parseFloat(data.avgPricePKR.toFixed(2)));
+
+  newState.usdPrices.change = calculateDifference(newState.usdPrices.values);
+  newState.eurPrices.change = calculateDifference(newState.eurPrices.values);
+  newState.pkrPrices.change = calculateDifference(newState.pkrPrices.values);
+
   return newState;
+};
+
+const calculateDifference = (values: number[]): number => {
+  if (values.length < 2) return 0;
+  const currentPrice = values[values.length - 1];
+  const previousPrice = values[values.length - 2];
+  return calculateDifferenceInPercentage(currentPrice, previousPrice);
+};
+
+const calculateDifferenceInPercentage = (
+  currentPrice: number,
+  previousPrice: number
+): number => {
+  const diff = currentPrice - previousPrice;
+  const percentage = (diff / previousPrice) * 100;
+  return parseFloat(percentage.toFixed(7));
 };
 
 const avgPriceSlice = createSlice({

@@ -31,7 +31,7 @@ export default function MainPage() {
       <Box sx={{ pt: 15 }}>
         <Grid container spacing={2}>
           <Grid size={{ xs: 6, md: 4 }}>
-            <Item sx={{ px: 5, m: 2, py: 3, borderRadius: 5 }}>
+            <Item sx={{ px: 3, m: 2, py: 3, borderRadius: 5 }}>
               <SparklineChartCard
                 cardTitle="Bitcoin - BTC"
                 cardIcon="/assets/bitcoin.png"
@@ -40,7 +40,7 @@ export default function MainPage() {
             </Item>
           </Grid>
           <Grid size={{ xs: 6, md: 4 }}>
-            <Item sx={{ px: 5, m: 2, py: 3, borderRadius: 5 }}>
+            <Item sx={{ px: 3, m: 2, py: 3, borderRadius: 5 }}>
               <SparklineChartCard
                 cardTitle="Bitcoin - BTC"
                 cardIcon="/assets/bitcoin.png"
@@ -49,7 +49,7 @@ export default function MainPage() {
             </Item>
           </Grid>
           <Grid size={{ xs: 6, md: 4 }}>
-            <Item sx={{ px: 5, m: 2, py: 3, borderRadius: 5 }}>
+            <Item sx={{ px: 3, m: 2, py: 3, borderRadius: 5 }}>
               <SparklineChartCard
                 cardTitle="Bitcoin - BTC"
                 cardIcon="/assets/bitcoin.png"

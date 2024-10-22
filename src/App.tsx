@@ -4,7 +4,7 @@ import useSocket from './customHooks/useSocket';
 function App() {
   useSocket()
   return (
-    <>Socket Connection</>
+   <MainPage/>
   );
 }
 
