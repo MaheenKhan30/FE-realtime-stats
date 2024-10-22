@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import countReducer from './slices/countSlice'; 
+import avgPriceReducer from './slices/avgPriceSlice';
 
 export const store = configureStore({
   reducer: {
     count: countReducer,
+    avgPrice: avgPriceReducer
   },
 });
 

@@ -14,7 +14,7 @@ import {
 import React from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import SpaceDashboardIcon from "@mui/icons-material/SpaceDashboard";
-import TextButton from "./reusable components/TextButton";
+import TextButton from "./reusableComponents/TextButton";
 
 const drawerWidth = 240;
 const navItems = ["Home", "About", "Contact"];
