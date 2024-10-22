@@ -1,4 +1,3 @@
-// src/redux/slices/exampleSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface CountState {
