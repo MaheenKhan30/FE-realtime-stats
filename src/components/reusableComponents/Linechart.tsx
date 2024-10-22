@@ -14,8 +14,8 @@ export default function Linechart(props: any) {
           data: yAxisValues,
         },
       ]}
-      width={800}
-      height={300}
+      width={900}
+      height={230}
     />
   );
 }

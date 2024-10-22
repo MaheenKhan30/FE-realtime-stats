@@ -128,7 +128,7 @@ const avgPriceSlice = createSlice({
       state.sparkLineChartValues = newSparkLineChartValues;
     },
     addToPriceHistory: (state, action) => {
-      if (state.previousPrices.length >= 5) {
+      if (state.previousPrices.length >= 20) {
         state.previousPrices.shift();
       }
       state.previousPrices.push(action.payload);

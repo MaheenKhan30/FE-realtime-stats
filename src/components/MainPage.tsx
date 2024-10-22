@@ -27,6 +27,7 @@ export default function MainPage() {
         flexDirection: "column",
         flexGrow: 1,
         backgroundColor: "#ededed",
+        minHeight: "100vh",
       }}
     >
       <Header />
@@ -34,7 +35,7 @@ export default function MainPage() {
       <Box sx={{ pt: 15 }}>
         <Grid container spacing={2}>
           <Grid size={{ xs: 6, md: 4 }}>
-            <Item sx={{ p: 3, m: 2, borderRadius: 5 }}>
+            <Item sx={{ p: 3, m: 1, borderRadius: 5 }}>
               <SparklineChartCard
                 cardTitle="Bitcoin - BTC"
                 cardIcon="/assets/bitcoin.png"
@@ -43,7 +44,7 @@ export default function MainPage() {
             </Item>
           </Grid>
           <Grid size={{ xs: 6, md: 4 }}>
-            <Item sx={{ p: 3, m: 2, borderRadius: 5 }}>
+            <Item sx={{ p: 3, m: 1, borderRadius: 5 }}>
               <SparklineChartCard
                 cardTitle="Bitcoin - BTC"
                 cardIcon="/assets/bitcoin.png"
@@ -52,7 +53,7 @@ export default function MainPage() {
             </Item>
           </Grid>
           <Grid size={{ xs: 6, md: 4 }}>
-            <Item sx={{ p: 3, m: 2, borderRadius: 5 }}>
+            <Item sx={{ p: 3, m: 1, borderRadius: 5 }}>
               <SparklineChartCard
                 cardTitle="Bitcoin - BTC"
                 cardIcon="/assets/bitcoin.png"
@@ -62,15 +63,12 @@ export default function MainPage() {
           </Grid>
 
           <Grid size={{ xs: 6, md: 8 }}>
-            <Item sx={{ p: 3, m: 2, borderRadius: 5 }}>
+            <Item sx={{ p: 3, m: 1, borderRadius: 5 }}>
               <LineChartCard/>
             </Item>
           </Grid>
           <Grid size={{ xs: 6, md: 4 }}>
-          <Item sx={{ p: 3, m: 2, borderRadius: 5 }}><StatsCard/></Item>
-          </Grid>
-          <Grid size={{ xs: 6, md: 12 }}>
-            <Item>Table</Item>
+          <Item sx={{ p: 3, m: 1, borderRadius: 5 }}><StatsCard/></Item>
           </Grid>
         </Grid>
       </Box>
