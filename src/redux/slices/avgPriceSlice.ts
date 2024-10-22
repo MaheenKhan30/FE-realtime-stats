@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-// import data from "../../dummy.json";
+import data from "../../dummy.json";
 
 interface AvgPriceStateInterface {
   eventType: string;
@@ -10,6 +10,7 @@ interface AvgPriceStateInterface {
   avgPriceUSD: number;
   avgPriceEUR: number;
   avgPricePKR: number;
+  eventTime: string
 }
 
 interface InitialStateInterface {
@@ -41,6 +42,7 @@ const initialState: InitialStateInterface = {
     avgPriceUSD: 0,
     avgPriceEUR: 0,
     avgPricePKR: 0,
+    eventTime: ""
   },
   // currentAvgPrice: data.currentAvgPrice,
   previousPrices: [],
@@ -126,7 +128,7 @@ const avgPriceSlice = createSlice({
       state.sparkLineChartValues = newSparkLineChartValues;
     },
     addToPriceHistory: (state, action) => {
-      if (state.previousPrices.length >= 50) {
+      if (state.previousPrices.length >= 5) {
         state.previousPrices.shift();
       }
       state.previousPrices.push(action.payload);

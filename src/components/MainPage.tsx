@@ -4,6 +4,9 @@ import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid2";
 import SparklineChartCard from "./SparklineChartCard";
+import StatsCard from "./StatsCard";
+import Linechart from "./reusableComponents/Linechart";
+import LineChartCard from "./LineChartCard";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: "#fff",
@@ -31,7 +34,7 @@ export default function MainPage() {
       <Box sx={{ pt: 15 }}>
         <Grid container spacing={2}>
           <Grid size={{ xs: 6, md: 4 }}>
-            <Item sx={{ px: 3, m: 2, py: 3, borderRadius: 5 }}>
+            <Item sx={{ p: 3, m: 2, borderRadius: 5 }}>
               <SparklineChartCard
                 cardTitle="Bitcoin - BTC"
                 cardIcon="/assets/bitcoin.png"
@@ -40,7 +43,7 @@ export default function MainPage() {
             </Item>
           </Grid>
           <Grid size={{ xs: 6, md: 4 }}>
-            <Item sx={{ px: 3, m: 2, py: 3, borderRadius: 5 }}>
+            <Item sx={{ p: 3, m: 2, borderRadius: 5 }}>
               <SparklineChartCard
                 cardTitle="Bitcoin - BTC"
                 cardIcon="/assets/bitcoin.png"
@@ -49,7 +52,7 @@ export default function MainPage() {
             </Item>
           </Grid>
           <Grid size={{ xs: 6, md: 4 }}>
-            <Item sx={{ px: 3, m: 2, py: 3, borderRadius: 5 }}>
+            <Item sx={{ p: 3, m: 2, borderRadius: 5 }}>
               <SparklineChartCard
                 cardTitle="Bitcoin - BTC"
                 cardIcon="/assets/bitcoin.png"
@@ -59,10 +62,12 @@ export default function MainPage() {
           </Grid>
 
           <Grid size={{ xs: 6, md: 8 }}>
-            <Item>Line Chart</Item>
+            <Item sx={{ p: 3, m: 2, borderRadius: 5 }}>
+              <LineChartCard/>
+            </Item>
           </Grid>
           <Grid size={{ xs: 6, md: 4 }}>
-            <Item>Stats</Item>
+          <Item sx={{ p: 3, m: 2, borderRadius: 5 }}><StatsCard/></Item>
           </Grid>
           <Grid size={{ xs: 6, md: 12 }}>
             <Item>Table</Item>

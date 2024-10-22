@@ -1,7 +1,8 @@
 import { useEffect, useRef } from "react";
 import openSocket from "socket.io-client";
 import { useAppDispatch } from "../redux/hook";
-import { setCurrentAvgPrice } from "../redux/slices/avgPriceSlice";
+import { addToPriceHistory, setCurrentAvgPrice } from "../redux/slices/avgPriceSlice";
+import { setHighestPrice } from "../redux/slices/statsSlice";
 
 const useSocket = (serverUrl?: string) => {
   const dispatch = useAppDispatch();
@@ -28,6 +29,8 @@ const useSocket = (serverUrl?: string) => {
       if (data) {
         console.log("Received data:", data);
         dispatch(setCurrentAvgPrice(data));
+        dispatch(addToPriceHistory(data));
+        dispatch(setHighestPrice(data?.avgPriceUSD));
       }
     });
 
