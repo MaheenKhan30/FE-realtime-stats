@@ -1,11 +1,11 @@
 import Box from "@mui/material/Box";
-import Header from "./Header";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid2";
+
+import Header from "./Header";
 import SparklineChartCard from "./SparklineChartCard";
 import StatsCard from "./StatsCard";
-import Linechart from "./reusableComponents/Linechart";
 import LineChartCard from "./LineChartCard";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -19,7 +19,7 @@ const Item = styled(Paper)(({ theme }) => ({
   }),
 }));
 
-export default function MainPage() {
+const MainPage = () => {
   return (
     <Box
       sx={{
@@ -64,14 +64,18 @@ export default function MainPage() {
 
           <Grid size={{ xs: 6, md: 8 }}>
             <Item sx={{ p: 3, m: 1, borderRadius: 5 }}>
-              <LineChartCard/>
+              <LineChartCard />
             </Item>
           </Grid>
-          <Grid size={{ xs: 6, md: 4 }}>
-          <Item sx={{ p: 3, m: 1, borderRadius: 5 }}><StatsCard/></Item>
+          <Grid size={{ xs: 12, md: 4 }}>
+            <Item sx={{ p: 3, m: 1, borderRadius: 5 }}>
+              <StatsCard />
+            </Item>
           </Grid>
         </Grid>
       </Box>
     </Box>
   );
-}
+};
+
+export default MainPage;

@@ -4,7 +4,7 @@ const TextButton = (props: any) => {
   const { text, icon } = props;
   return (
     <Button
-    sx={{
+      sx={{
         color: "#555657",
         fontSize: "large",
         textTransform: "none",

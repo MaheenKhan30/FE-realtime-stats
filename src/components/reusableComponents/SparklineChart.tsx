@@ -1,6 +1,6 @@
 import { SparkLineChart } from "@mui/x-charts/SparkLineChart";
-export default function SparklineChart(props: any) {
-    const {values}= props
+const SparklineChart = (props: any) => {
+  const { values } = props;
   return (
     <SparkLineChart
       data={values}
@@ -10,4 +10,6 @@ export default function SparklineChart(props: any) {
       showTooltip
     />
   );
-}
+};
+
+export default SparklineChart;

@@ -1,21 +1,21 @@
-import * as React from "react";
 import { LineChart } from "@mui/x-charts/LineChart";
 
-
-export default function Linechart(props: any) {
-
-    const { xAxisValues, yAxisValues } = props;
+const Linechart = (props: any) => {
+  const { xAxisValues, yAxisValues } = props;
 
   return (
-    <LineChart
-      xAxis={[{ data: xAxisValues }]}
-      series={[
-        {
-          data: yAxisValues,
-        },
-      ]}
-      width={900}
-      height={230}
-    />
+    <div style={{ width: "100%" }}>
+      <LineChart
+        xAxis={[{ data: xAxisValues }]}
+        series={[
+          {
+            data: yAxisValues,
+          },
+        ]}
+        height={230}
+      />
+    </div>
   );
-}
+};
+
+export default Linechart;

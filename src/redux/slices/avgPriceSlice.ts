@@ -10,7 +10,7 @@ interface AvgPriceStateInterface {
   avgPriceUSD: number;
   avgPriceEUR: number;
   avgPricePKR: number;
-  eventTime: string
+  eventTime: string;
 }
 
 interface InitialStateInterface {
@@ -42,7 +42,7 @@ const initialState: InitialStateInterface = {
     avgPriceUSD: 0,
     avgPriceEUR: 0,
     avgPricePKR: 0,
-    eventTime: ""
+    eventTime: "",
   },
   // currentAvgPrice: data.currentAvgPrice,
   previousPrices: [],

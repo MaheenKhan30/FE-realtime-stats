@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface StatsSliceInterface {
   pricesHistory: number[];
@@ -7,13 +7,13 @@ interface StatsSliceInterface {
 }
 
 const initialState: StatsSliceInterface = {
-    pricesHistory: [],
-    highestPrice: 0,
-    lowestPrice: 0
+  pricesHistory: [],
+  highestPrice: 0,
+  lowestPrice: 0,
 };
 
 const statsSlice = createSlice({
-  name: 'stats',
+  name: "stats",
   initialState,
   reducers: {
     setHighestPrice: (state, action: PayloadAction<number>) => {
@@ -21,13 +21,12 @@ const statsSlice = createSlice({
         state.pricesHistory.shift();
       }
       state.pricesHistory.push(action.payload);
-      const highestPrice = state.pricesHistory.reduce((a, b) => Math.max(a, b))
-      const lowestPrice = state.pricesHistory.reduce((a, b) => Math.min(a, b))
+      const highestPrice = state.pricesHistory.reduce((a, b) => Math.max(a, b));
+      const lowestPrice = state.pricesHistory.reduce((a, b) => Math.min(a, b));
 
-      state.highestPrice = parseFloat(highestPrice.toFixed(2))
-      state.lowestPrice = parseFloat(lowestPrice.toFixed(2))
-      
-    }
+      state.highestPrice = parseFloat(highestPrice.toFixed(2));
+      state.lowestPrice = parseFloat(lowestPrice.toFixed(2));
+    },
   },
 });
 

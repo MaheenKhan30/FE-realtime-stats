@@ -1,5 +1,5 @@
 import { Box, Divider, Typography } from "@mui/material";
-import React from "react";
+
 import { useAppSelector } from "../redux/hook";
 
 const StatsCard = () => {
@@ -66,7 +66,7 @@ const StatsCard = () => {
             />
             <Box sx={{ display: "flex", gap: 1 }}></Box>
             <Typography sx={{ color: "#555657", fontSize: "large" }}>
-              Highest Price (Last 24 hrs):
+              Highest Price:
             </Typography>
             <Typography sx={{ color: "#2d6aed", fontSize: "large" }}>
               {highestPrice} USD
@@ -78,7 +78,7 @@ const StatsCard = () => {
               display: "flex",
               alignItems: "center",
               position: "relative",
-              left: "-5px", // Adjust the value as needed to overlap the divider
+              left: "-5px", 
               gap: 2,
             }}
           >
@@ -92,7 +92,7 @@ const StatsCard = () => {
             />
             <Box sx={{ display: "flex", gap: 1 }}></Box>
             <Typography sx={{ color: "#555657", fontSize: "large" }}>
-              Lowest Price (Last 24 hrs):
+              Lowest Price:
             </Typography>
             <Typography sx={{ color: "#2d6aed", fontSize: "large" }}>
               {lowestPrice} USD

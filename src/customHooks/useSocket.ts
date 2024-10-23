@@ -1,10 +1,16 @@
 import { useEffect, useRef } from "react";
+
 import openSocket from "socket.io-client";
+
 import { useAppDispatch } from "../redux/hook";
-import { addToPriceHistory, setCurrentAvgPrice } from "../redux/slices/avgPriceSlice";
+
+import {
+  addToPriceHistory,
+  setCurrentAvgPrice,
+} from "../redux/slices/avgPriceSlice";
 import { setHighestPrice } from "../redux/slices/statsSlice";
 
-const useSocket = (serverUrl?: string) => {
+const useSocket = () => {
   const dispatch = useAppDispatch();
   const socketRef = useRef<any>(null);
 
