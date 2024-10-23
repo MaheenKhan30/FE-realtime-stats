@@ -7,8 +7,8 @@ import { useAppDispatch } from "../redux/hook";
 import {
   addToPriceHistory,
   setCurrentAvgPrice,
+  setHighestandLowestPrice,
 } from "../redux/slices/avgPriceSlice";
-import { setHighestPrice } from "../redux/slices/statsSlice";
 
 const useSocket = () => {
   const dispatch = useAppDispatch();
@@ -33,10 +33,9 @@ const useSocket = () => {
 
     socket.on("avgPriceUpdate", (data: any) => {
       if (data) {
-        console.log("Received data:", data);
         dispatch(setCurrentAvgPrice(data));
         dispatch(addToPriceHistory(data));
-        dispatch(setHighestPrice(data?.avgPriceUSD));
+        dispatch(setHighestandLowestPrice(data?.avgPriceUSD));
       }
     });
 

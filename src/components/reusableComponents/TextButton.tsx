@@ -1,6 +1,10 @@
 import { Button } from "@mui/material";
 
-const TextButton = (props: any) => {
+interface TextButtonPropsInterface {
+  text: string;
+  icon?: JSX.Element;
+}
+const TextButton: React.FC<TextButtonPropsInterface> = (props) => {
   const { text, icon } = props;
   return (
     <Button

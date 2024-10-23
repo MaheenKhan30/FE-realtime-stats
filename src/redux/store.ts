@@ -1,11 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import avgPriceReducer from "./slices/avgPriceSlice";
-import statsReducer from "./slices/statsSlice";
 
 export const store = configureStore({
   reducer: {
     avgPrice: avgPriceReducer,
-    stats: statsReducer,
   },
 });
 

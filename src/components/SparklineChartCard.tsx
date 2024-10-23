@@ -6,8 +6,14 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 
 import SparklineChart from "./reusableComponents/SparklineChart";
 import { useAppSelector } from "../redux/hook";
+import { formatPrecision } from "../utils/formatPrecision";
 
-const SparklineChartCard = (props: any) => {
+interface SparklineChartCardPropsInterface {
+  cardTitle: string;
+  cardIcon: string;
+  currency: string;
+}
+const SparklineChartCard: React.FC<SparklineChartCardPropsInterface> = (props) => {
   const theme = useTheme();
   const isMediumOrBelow = useMediaQuery(theme.breakpoints.down("lg"));
   const { cardTitle, cardIcon, currency } = props;
@@ -23,6 +29,13 @@ const SparklineChartCard = (props: any) => {
       : currency === "USD"
       ? sparkLineChartValues.usdPrices
       : sparkLineChartValues.eurPrices;
+
+  const currencyAvgPrice =
+    currency === "PKR"
+      ? formatPrecision(currentAvgPrice.avgPricePKR, 2)
+      : currency === "USD"
+      ? formatPrecision(currentAvgPrice.avgPriceUSD, 2)
+      : formatPrecision(currentAvgPrice.avgPriceEUR, 2);
   return (
     <>
       <Box sx={{ display: "flex", gap: 1, alignItems: "center", mb: 3 }}>
@@ -48,11 +61,7 @@ const SparklineChartCard = (props: any) => {
         }}
       >
         <Typography sx={{ color: "#000", fontWeight: "bold", fontSize: 30 }}>
-          {currency === "PKR"
-            ? parseFloat(currentAvgPrice.avgPricePKR.toFixed(2))
-            : currency === "USD"
-            ? parseFloat(currentAvgPrice.avgPriceUSD.toFixed(2))
-            : parseFloat(currentAvgPrice.avgPriceEUR.toFixed(2))}
+          {currencyAvgPrice}
         </Typography>
         <Box sx={{ display: "flex", gap: 0.4 }}>
           {currencyPrice?.change > 0 ? (

@@ -4,7 +4,7 @@ import Linechart from "./reusableComponents/Linechart";
 
 import { useAppSelector } from "../redux/hook";
 
-const LineChartCard = () => {
+const LineChartCard: React.FC = () => {
   const previousPrices = useAppSelector(
     (state) => state.avgPrice.previousPrices
   );

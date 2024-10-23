@@ -3,7 +3,7 @@ import SpaceDashboardIcon from "@mui/icons-material/SpaceDashboard";
 
 import TextButton from "./reusableComponents/TextButton";
 
-const Header = () => {
+const Header: React.FC = () => {
   return (
     <>
       <AppBar component="nav" sx={{ backgroundColor: "white" }}>

@@ -1,6 +1,10 @@
 import { LineChart } from "@mui/x-charts/LineChart";
 
-const Linechart = (props: any) => {
+interface LinechartPropsInterface {
+  xAxisValues: number[];
+  yAxisValues: number[];
+}
+const Linechart: React.FC<LinechartPropsInterface> = (props) => {
   const { xAxisValues, yAxisValues } = props;
 
   return (

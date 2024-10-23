@@ -1,25 +1,15 @@
 import Box from "@mui/material/Box";
-import { styled } from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid2";
 
 import Header from "./Header";
 import SparklineChartCard from "./SparklineChartCard";
 import StatsCard from "./StatsCard";
 import LineChartCard from "./LineChartCard";
+import Card from "./reusableComponents/Card";
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-  ...theme.applyStyles("dark", {
-    backgroundColor: "#1A2027",
-  }),
-}));
+import { currencies } from "../utils/constants";
 
-const MainPage = () => {
+const MainPage : React.FC = () => {
   return (
     <Box
       sx={{
@@ -28,49 +18,34 @@ const MainPage = () => {
         flexGrow: 1,
         backgroundColor: "#ededed",
         minHeight: "100vh",
+        px:3
       }}
     >
       <Header />
 
       <Box sx={{ pt: 15 }}>
         <Grid container spacing={2}>
-          <Grid size={{ xs: 6, md: 4 }}>
-            <Item sx={{ p: 3, m: 1, borderRadius: 5 }}>
-              <SparklineChartCard
-                cardTitle="Bitcoin - BTC"
-                cardIcon="/assets/bitcoin.png"
-                currency="USD"
-              />
-            </Item>
-          </Grid>
-          <Grid size={{ xs: 6, md: 4 }}>
-            <Item sx={{ p: 3, m: 1, borderRadius: 5 }}>
-              <SparklineChartCard
-                cardTitle="Bitcoin - BTC"
-                cardIcon="/assets/bitcoin.png"
-                currency="EUR"
-              />
-            </Item>
-          </Grid>
-          <Grid size={{ xs: 6, md: 4 }}>
-            <Item sx={{ p: 3, m: 1, borderRadius: 5 }}>
-              <SparklineChartCard
-                cardTitle="Bitcoin - BTC"
-                cardIcon="/assets/bitcoin.png"
-                currency="PKR"
-              />
-            </Item>
-          </Grid>
-
-          <Grid size={{ xs: 6, md: 8 }}>
-            <Item sx={{ p: 3, m: 1, borderRadius: 5 }}>
+          {currencies &&
+            currencies?.map((currency, index) => (
+              <Grid size={{ xs: 12, md: 4 }} key={index}>
+                <Card>
+                  <SparklineChartCard
+                    cardTitle="Bitcoin - BTC"
+                    cardIcon="/assets/bitcoin.png"
+                    currency={currency}
+                  />
+                </Card>
+              </Grid>
+            ))}
+          <Grid size={{ xs: 12, md: 12, lg: 8 }}>
+            <Card>
               <LineChartCard />
-            </Item>
+            </Card>
           </Grid>
-          <Grid size={{ xs: 12, md: 4 }}>
-            <Item sx={{ p: 3, m: 1, borderRadius: 5 }}>
+          <Grid size={{ xs: 12, md: 12, lg: 4 }}>
+            <Card>
               <StatsCard />
-            </Item>
+            </Card>
           </Grid>
         </Grid>
       </Box>

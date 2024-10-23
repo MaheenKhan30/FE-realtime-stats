@@ -1,5 +1,9 @@
 import { SparkLineChart } from "@mui/x-charts/SparkLineChart";
-const SparklineChart = (props: any) => {
+
+interface SparklineChartPropsInterface {
+  values: number[];
+}
+const SparklineChart: React.FC<SparklineChartPropsInterface> = (props) => {
   const { values } = props;
   return (
     <SparkLineChart

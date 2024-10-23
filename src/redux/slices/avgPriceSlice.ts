@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-import data from "../../dummy.json";
+import { formatPrecision } from "../../utils/formatPrecision";
+import { calculateDifferenceInPercentage } from "../../utils/calculateDifferenceInPercentage";
 
 interface AvgPriceStateInterface {
   eventType: string;
@@ -13,11 +13,6 @@ interface AvgPriceStateInterface {
   eventTime: string;
 }
 
-interface InitialStateInterface {
-  currentAvgPrice: AvgPriceStateInterface;
-  previousPrices: AvgPriceStateInterface[];
-  sparkLineChartValues: SparkLineChartValuesInterface;
-}
 interface SparkLineChartValuesInterface {
   usdPrices: {
     change: number;
@@ -33,6 +28,19 @@ interface SparkLineChartValuesInterface {
   };
 }
 
+interface StatsValuesInterface {
+  pricesHistory: number[];
+  highestPrice: number;
+  lowestPrice: number;
+}
+
+interface InitialStateInterface {
+  currentAvgPrice: AvgPriceStateInterface;
+  previousPrices: AvgPriceStateInterface[];
+  sparkLineChartValues: SparkLineChartValuesInterface;
+  statsValues: StatsValuesInterface;
+}
+
 const initialState: InitialStateInterface = {
   currentAvgPrice: {
     eventType: "avgPrice",
@@ -44,7 +52,6 @@ const initialState: InitialStateInterface = {
     avgPricePKR: 0,
     eventTime: "",
   },
-  // currentAvgPrice: data.currentAvgPrice,
   previousPrices: [],
   sparkLineChartValues: {
     usdPrices: {
@@ -60,11 +67,27 @@ const initialState: InitialStateInterface = {
       values: [],
     },
   },
-  // sparkLineChartValues: {
-  //   usdPrices: data.usdPrices,
-  //   eurPrices: data.eurPrices,
-  //   pkrPrices: data.pkrPrices,
-  // },
+  statsValues: {
+    pricesHistory: [],
+    highestPrice: 0,
+    lowestPrice: 0,
+  },
+};
+
+const updateSparkLineChartValues = (
+  prevValues: {
+    change: number;
+    values: number[];
+  },
+  data: AvgPriceStateInterface
+) => {
+  const newValues = { ...prevValues };
+  if (newValues.values.length >= 10) {
+    newValues.values.shift();
+  }
+  newValues.values.push(formatPrecision(data.avgPriceUSD, 2));
+  newValues.change = calculateDifference(newValues.values);
+  return newValues;
 };
 
 const addToSparkLineChartValues = (
@@ -73,24 +96,9 @@ const addToSparkLineChartValues = (
 ) => {
   const newState = { ...prevState };
 
-  if (newState.usdPrices.values.length >= 10) {
-    newState.usdPrices.values.shift();
-  }
-  newState.usdPrices.values.push(parseFloat(data.avgPriceUSD.toFixed(2)));
-
-  if (newState.eurPrices.values.length >= 10) {
-    newState.eurPrices.values.shift();
-  }
-  newState.eurPrices.values.push(parseFloat(data.avgPriceEUR.toFixed(2)));
-
-  if (newState.pkrPrices.values.length >= 10) {
-    newState.pkrPrices.values.shift();
-  }
-  newState.pkrPrices.values.push(parseFloat(data.avgPricePKR.toFixed(2)));
-
-  newState.usdPrices.change = calculateDifference(newState.usdPrices.values);
-  newState.eurPrices.change = calculateDifference(newState.eurPrices.values);
-  newState.pkrPrices.change = calculateDifference(newState.pkrPrices.values);
+  newState.usdPrices = updateSparkLineChartValues(newState.usdPrices, data);
+  newState.eurPrices = updateSparkLineChartValues(newState.eurPrices, data);
+  newState.pkrPrices = updateSparkLineChartValues(newState.pkrPrices, data);
 
   return newState;
 };
@@ -100,15 +108,6 @@ const calculateDifference = (values: number[]): number => {
   const currentPrice = values[values.length - 1];
   const previousPrice = values[values.length - 2];
   return calculateDifferenceInPercentage(currentPrice, previousPrice);
-};
-
-const calculateDifferenceInPercentage = (
-  currentPrice: number,
-  previousPrice: number
-): number => {
-  const diff = currentPrice - previousPrice;
-  const percentage = (diff / previousPrice) * 100;
-  return parseFloat(percentage.toFixed(7));
 };
 
 const avgPriceSlice = createSlice({
@@ -133,8 +132,27 @@ const avgPriceSlice = createSlice({
       }
       state.previousPrices.push(action.payload);
     },
+    setHighestandLowestPrice: (state, action: PayloadAction<number>) => {
+      if (state.statsValues.pricesHistory.length >= 288) {
+        state.statsValues.pricesHistory.shift();
+      }
+      state.statsValues.pricesHistory.push(action.payload);
+      const highestPrice = state.statsValues.pricesHistory.reduce((a, b) =>
+        Math.max(a, b)
+      );
+      const lowestPrice = state.statsValues.pricesHistory.reduce((a, b) =>
+        Math.min(a, b)
+      );
+
+      state.statsValues.highestPrice = parseFloat(highestPrice.toFixed(2));
+      state.statsValues.lowestPrice = parseFloat(lowestPrice.toFixed(2));
+    },
   },
 });
 
-export const { setCurrentAvgPrice, addToPriceHistory } = avgPriceSlice.actions;
+export const {
+  setCurrentAvgPrice,
+  addToPriceHistory,
+  setHighestandLowestPrice,
+} = avgPriceSlice.actions;
 export default avgPriceSlice.reducer;
