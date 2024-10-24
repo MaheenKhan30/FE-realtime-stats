@@ -1,46 +1,39 @@
-# Getting Started with Create React App
+# Frontend - FE-realtime-stats
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
+This frontend application is built using React.js. It establishes a Socket.IO connection to the backend to receive real-time trade data for Bitcoin. The data is visualized using charts to display fluctuations in the average price of Bitcoin across three currencies (USD, PKR, EUR).
 
-## Available Scripts
+## Features
+- Real-time data visualization of Bitcoin price fluctuations.
+- Sparkline chart showing percentage difference in price.
+- Stats card for bitcoin statistics.
+- Line chart for showing change in price of currency.
+  
+## Running the Application Locally
 
-In the project directory, you can run:
+### Prerequisites
+- Node.js (v20.15.0 or higher)
+- NPM (10.7.0 or higher)
 
-### `npm start`
+### Steps
+1. Clone the repository.
+2. Copy the environment variables from `.env.example` and save them in a `.env` file.
+3. Install the dependencies:
+    ```bash
+    npm install
+    ```
+4. Start the development server:
+    ```bash
+    npm run start
+    ```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Dependencies
+- @emotion/react
+- @emotion/styled
+- @mui/material
+- @mui/x-charts
+- @reduxjs/toolkit
+- react
+- react-dom
+- react-redux
+- socket.io-client
